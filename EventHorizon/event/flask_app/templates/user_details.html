@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="background">
+        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+            <span class="navbar-text">
+                <h1> Event Horizon </h1>
+            </span>
+        </nav>
+        <br>
+        <h2 class="text-center text-info"> About {{user.first_name}}</h2>
+        <div class = "navBar container">
+            <a  class="btn btn-primary" href="/dashboard">Home</a>
+            <a  class="btn btn-primary" href="/event/bulletin"> More Events </a>
+            <a class="btn btn-danger float-right" href="/logout">Logout</a>
+        </div>
+
+        <div class="event">
+            <div class="container card-body text-center">
+                <div class="card text-white bg-info mb-3 center" style="max-width: 40rem;">
+                    <div class="card-header"> <h2> Creator's Information</h2></div>
+                    <div class="card-body">
+                        <h5 class="card-title"> Name: </h5>
+                        <p class="card-text"> {{user.name}} </p>
+                        <h5 class="card-title"> Email: </h5>
+                        <p class="card-text"> {{user.email}} </p>
+                    </div>
+                </div>
+                <div class="card text-center" style="width: 40rem;">
+                    <div class="card-header text-info">
+                        <h4> Events Attending  </h4>
+                    </div>
+                    {% for event in all_user.joined_events %}
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"> <a href="/event/details/{{event.id}}"> {{event.event_name}}</a> </li>
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

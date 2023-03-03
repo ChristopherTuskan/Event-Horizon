@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulletin Board</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="background">
+        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+            <span class="navbar-text">
+                <h1> Event Horizon </h1>
+            </span>
+        </nav>
+        <br>
+        <h1 class="text-center" style="color: hsl(200, 91%, 27%)"> Search Events </h1>
+        <div class="container">
+            <a class="btn btn-primary" href="/event/new">+ Create</a>
+            <a class="btn btn-primary" href="/dashboard"> My Events </a>
+            <a class="btn btn-danger float-right" href="/logout">Logout</a>
+        </div>
+        <br>
+        <table class="table table-bordered container">
+            <thead>
+                <tr class="table-primary">
+                    <th> Event Name </th>
+                    <th> Location Name </th>
+                    <th> Event Creator </th>
+                    <th> Attendees </th>
+                    <th> Date </th>
+                    <th> Action </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                    {% if event.date != None %}
+                            <tr class="table-warning">
+                                <td>
+                                    <a href="/event/details/{{event.id}}">{{event.event_name}}</a></td>
+                                <td>{{event.location}}</td>
+                                <td><a href="/user/details/{{event.creator.id}}">{{event.creator.name}}</a></td>
+                                <td>{{event.member_num}}</td>
+                                <td>{{event.date.strftime('%m/%d/%Y')}}</td>
+                                <td>
+                                    {% if event.id in logged_in_user.joined_events %}
+                                        <a href="/event/leave/{{event.id}}">Leave</a>
+                                    {% else %}
+                                        <a href="/event/join/{{event.id}}">Join</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

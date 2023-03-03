@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <span class="navbar-text">
+            <h1> Event Horizon </h1>
+        </span>
+    </nav>
+    <br>
+    <h2 class="text-center" style="color: hsl(200, 91%, 27%)">Add a New Event</h2>
+    <div class="container">
+        <a class="btn btn-primary" href="/dashboard">Home</a>
+        <a class="btn btn-danger float-right" href="/logout">Logout</a>
+    </div>
+    <br>
+    <div class="container">
+        <form action="/event/create" method="post" class="col-6 mx-auto">
+            <div class="alert alert-primary" role="alert">
+                {% with messages = get_flashed_messages() %}<!-- declare a variable called messages -->
+                {% if messages %}   <!-- check if there are any messages -->
+                    {% for message in messages %}   <!-- loop through the messages -->
+                        <p>{{message}}</p>  <!-- display each message in a paragraph tag -->
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+            <div class="form-group">
+                <input type="text" name="event_name" placeholder="Event Name" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" name="description" placeholder="Event Description" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" name="location" placeholder="Location of Event" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="date" name="date" placeholder="Date of Event" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="number" name="member_num" placeholder="Number of Participants" class="form-control">
+            </div>
+            <input type="submit" value="Add" class="btn btn-primary">
+        </form>
+    </div>
+</body>
+</html>

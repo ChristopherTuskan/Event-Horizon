@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details Event</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <span class="navbar-text">
+            <h1> Event Horizon </h1>
+        </span>
+    </nav>
+    <br>
+    <h1 class="text-center" style="color: hsl(200, 91%, 27%)"> Event Details </h1>
+    <div class="container">
+        <a class="btn btn-primary" href="/dashboard">Home</a>
+        <a  class="btn btn-primary" href="/event/bulletin">Bulletin</a>
+        <a class="btn btn-danger float-right" href="/logout">Logout</a>
+    </div>
+    <br>
+    <div class="container">
+        <form class="col-6 mx-a"></form>
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-dark list-group-item-action flex-column align-items-start active">
+                    <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Event Name:</h5>
+                    </div>
+                    <p class="mb-1">{{event.event_name}}</p>
+                </a>
+                <br>
+                <a href="#" class="list-group-item list-group-item-primary list-group-item-action flex-column align-items-start active">
+                    <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Event Date:</h5>
+                    </div>
+                    <p class="mb-1">{{event.date.strftime('%m/%d/%Y')}}</p>
+                </a>
+                <a href="#" class="list-group-item list-group-item-info list-group-item-action flex-column align-items-start active">
+                    <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Event Description:</h5>
+                    </div>
+                    <p class="mb-1">{{event.description}}</p>
+                </a>
+                <a href="#" class="list-group-item list-group-item-primary list-group-item-action flex-column align-items-start active">
+                    <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Event Location:</h5>
+                    </div>
+                    <p class="mb-1">{{event.location}}</p>
+                </a>
+                <a href="#" class="list-group-item list-group-item-info list-group-item-action flex-column align-items-start active">
+                    <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Event Participants:</h5>
+                    </div>
+                    <p class="mb-1">{{event.member_num}}</p>
+                </a>
+            </div>
+            <div class="m-3 mx-auto col-6">
+                <iframe
+                width="500"
+                height="350"
+                style="border:5"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA34n4ev9tVlzE9ZBzr9wik4ZVVqjsLuLM
+                    &q={{event.location}}">
+                </iframe>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
